@@ -22,7 +22,7 @@ impl<T> CriticalSectionSpinLockMutex<T> {
 }
 
 #[cfg(not(any(feature = "esp32s2", feature = "esp8266")))]
-impl<T> mutex_trait::Mutex for &'_ CriticalSectionSpinLockMutex<T> {
+impl<T> mutex_trait::Mutex for CriticalSectionSpinLockMutex<T> {
     type Data = T;
 
     fn lock<R>(&mut self, f: impl FnOnce(&mut Self::Data) -> R) -> R {
@@ -57,7 +57,7 @@ impl<T> CriticalSectionMutex<T> {
     }
 }
 
-impl<T> mutex_trait::Mutex for &'_ CriticalSectionMutex<T> {
+impl<T> mutex_trait::Mutex for CriticalSectionMutex<T> {
     type Data = T;
 
     fn lock<R>(&mut self, f: impl FnOnce(&mut Self::Data) -> R) -> R {
@@ -88,7 +88,7 @@ impl<T> SpinLockMutex<T> {
 }
 
 #[cfg(not(any(feature = "esp32s2", feature = "esp8266")))]
-impl<T> mutex_trait::Mutex for &'_ SpinLockMutex<T> {
+impl<T> mutex_trait::Mutex for SpinLockMutex<T> {
     type Data = T;
 
     fn lock<R>(&mut self, f: impl FnOnce(&mut Self::Data) -> R) -> R {
